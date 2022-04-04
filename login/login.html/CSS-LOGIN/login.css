@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    font-size: 2rem;
+    background-color: salmon;
+
+}
+.form{
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.5rem;
+    border: 2px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+
+.formulario{
+    height: 250px;
+    margin-top: 170px ;
+    display: flex;
+    justify-content: center;
+
+}
+.btnLogin{
+    
+    display: flex;
+    justify-content: center;
+    
+}
+.contato{
+  border-width: 3px;
+  border-style: solid;
+  border-color: black;
+
+}
