@@ -547,7 +547,8 @@
                  <textarea class="message" placeholder="Digite sua mensagem"></textarea>
                  <input type="submit" class="btn-enviar" value="Enviar">
              </form>
- 
+             
+             
             </div>
  
             <section class="maps">

@@ -35,8 +35,9 @@
         </div>
 
         <div class="categorias">
-            <h3>Contatos</h3>
+          <a href=""><h3>Contatos</h3>
             <img src="fotos/ligar 1.png" alt="">
+        </a>  
         </div>
 
         <div class="categorias">
@@ -55,6 +56,28 @@
             <h1>TITULO DA SESSÃO</h1>
         </div>
     </section>   
+  
+  <?php 
+
+        require_once('controller/controllerContatos.php');
+
+        $listContato = listarContato();
+
+        //estrutura de repetição para retornar os dados do array e printar na tela
+        foreach($listContato as $item){
+            ?>
+         <tr id="tblLinhas">
+                    <td class="tblColunas registros"><?= $item['nome'] ?></td>
+                    <td class="tblColunas registros"><?= $item['email'] ?></td>
+                    <td class="tblColunas registros"><?= $item['mensagem'] ?></td>
+        </tr>
+
+        
+      <?php  
+        }
+        ?>
+ 
+    
    </main>
 
    <footer>
