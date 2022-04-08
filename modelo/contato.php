@@ -14,36 +14,6 @@
 
  $statusResposta = (bool) false;
 
- function insertContato($dadosContato){
-     
-    //abre a conexao com o BD
-
-    //monta o script para enviar no BD  
-
-    $sql = "insert into mensagem
-            (nome,
-            email,
-            mensagem)"
-
-            values
-            ('" . $dadosContato['nome'] . "',
-            '" . $dadosContato['email'] . "',
-            '" . $dadosContato['mensagem'] . "',
-
-}
-if (mysqli_query($conexao, $sql)) {
-
-    if (mysqli_affected_rows($conexao))
-
-        $statusReposta = true;  // Podemos definir a variável criando em qualquer ligar
-
-} else
-
-    // Solicita o fechamento da conexão
-    fecharConexaoMySql($conexao);
-
-return $statusReposta;
-}
 
 
 //funcao para listar todos os contatos no BD

@@ -56,6 +56,24 @@
             <h1>TITULO DA SESSÃO</h1>
         </div>
     </section>   
+
+      <div id="consultaDados"> 
+        <table id="tblConsulta">
+          <tr>
+            <td id="tblTitulo" colspan="6">
+              <h1>Consulta de Clientes</h1>
+            </td>
+          </tr>
+
+          <tr id="tblLinhas">
+          <td class="tblColunas destaque"> Nome </td>
+              <td class="tblColunas destaque">Email </td>
+              <td class="tblColunas destaque">Mensagem </td>
+              <td class="tblColunas destaque">Opções </td>
+
+          </tr>
+  
+      </div>
   
   <?php 
 
@@ -70,13 +88,16 @@
                     <td class="tblColunas registros"><?= $item['nome'] ?></td>
                     <td class="tblColunas registros"><?= $item['email'] ?></td>
                     <td class="tblColunas registros"><?= $item['mensagem'] ?></td>
-        </tr>
 
+                    
+        </tr>
+          
         
       <?php  
         }
         ?>
  
+      </table>
     
    </main>
 
