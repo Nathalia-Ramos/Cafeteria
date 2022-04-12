@@ -30,8 +30,11 @@
         </div>
 
         <div class="categorias">
-            <h3>Adm. de Categorias</h3>
-            <img src="fotos/Group 9.png" alt="">
+        <a href="">
+           <h3>Adm. de Categorias</h3>
+          <img src="fotos/Group 9.png" alt="">
+        </a>
+          
         </div>
 
         <div class="categorias">
@@ -74,6 +77,12 @@
           </tr>
   
       </div>
+
+      
+    
+
+
+
   
   <?php 
 
@@ -89,8 +98,26 @@
                     <td class="tblColunas registros"><?= $item['email'] ?></td>
                     <td class="tblColunas registros"><?= $item['mensagem'] ?></td>
 
-                    
+                    <td class="tblColunas registros">
+                        
+                       
+                        <a onClick="return confirm('Tem certeza que deseja excluir?');" href="router.php?component=contatos&action=deletar&id=<?= $item['id'] ?>">
+                            <img src="../img/excluir.png" alt="Excluir" title="Excluir" class="excluir">
+                        </a>
+                    </td>
+
         </tr>
+
+          <?php 
+            require_once('model/bd/contato.php');
+
+            $insertCategorias = categorias();
+
+            foreach($categorias as $item ){
+
+            }
+          ?>
+        
           
         
       <?php  

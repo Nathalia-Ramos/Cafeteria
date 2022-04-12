@@ -29,7 +29,6 @@ function selectAllContatos()
 
     //valida se o BD retorna registros
     if ($result) {
-
         $cont = 0;
         //nesta repeticao estamos convertendo os dados do banco de daos do BD em um array ($rsDados),
         // alem de o proprio while conseguir gerenciar a quantidade de vezes que dveria ser feita a repeticao
@@ -49,5 +48,64 @@ function selectAllContatos()
         return $arrayDados;
     }
 }
+
+
+function categorias($dados){
+
+    $conexao = conexaoMysql();
+
+    //script para listar todos os dados do banco de dados 
+    $sql = 'select * from tblcategorias order by idcontatos desc';
+
+    $result = mysqli_query($conexao, $sql);
+
+    if($result) {
+
+        $cont = 0;
+
+        while ($rsDados = mysqli_fetch_assoc($result) ) {
+
+            $arrayDados[$cont] = array(
+                "graos"    =>   $rsDados['graos'],
+                "kit"      =>   $rsDados['kit']
+            );
+            $cont++;
+        }
+
+        fecharConexaoMySql($conexao);
+
+        return $arrayDados;
+   
+    }
+}
+
+function insertCategoria ($dados) {
+
+    $conexao = conexaoMysql();
+
+    //montar o script 
+        $sql = "insert into tblcategorias
+                    (graos,
+                     kit)
+                
+                values
+                '" . $dados['graos'] . "',
+                '" . $dados['kit'] . "');";
+
+        if(mysqli_query($conexao, $sql)){
+
+            if (mysqli_affected_rows($conexao)) {
+                $statusResposta = true;
+          
+            }else
+                 // Solicita o fechamento da conexão
+                fecharConexaoMySql($conexao);
+
+                 return $statusReposta;
+        
+        }
+
+}
+
 
 ?>
