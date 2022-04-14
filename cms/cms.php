@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cms/CSS/categoria.css ">
     <link rel="stylesheet" href="CSS/cms.css">
     <title>CMS</title>
 </head>
@@ -78,7 +79,7 @@
   
       </div>
 
-      
+     
     
 
 
@@ -101,31 +102,74 @@
                     <td class="tblColunas registros">
                         
                        
-                        <a onClick="return confirm('Tem certeza que deseja excluir?');" href="router.php?component=contatos&action=deletar&id=<?= $item['id'] ?>">
+                        <a onClick="return confirm('Tem certeza que deseja excluir?');" href="router.php?component=categorias&action=deletar&id=<?= $item['id'] ?>">
                             <img src="../img/excluir.png" alt="Excluir" title="Excluir" class="excluir">
                         </a>
                     </td>
 
         </tr>
 
-          <?php 
-            require_once('model/bd/contato.php');
-
-            $insertCategorias = categorias();
-
-            foreach($categorias as $item ){
-
-            }
-          ?>
         
           
         
       <?php  
         }
         ?>
+        
  
       </table>
+     
+      <div id="consultaCategoria"> 
+        <table id="tblCategoria">
+          <tr>
+            <td id="tblTitulo" colspan="6">
+              <h1>Categorias</h1>
+
+            </td>
+          </tr>
+
+        
+  
+      </div>
+
+      <?php 
+      
+            require_once('controller/controllerCategoria.php');
+
+            $listCategoria = listarCategoria();
+
+            if($listCategoria) {  
+
+            foreach($listCategoria as $item){
+                ?>
+            <tr id="tblCategorias2">
+            <input type="field" placeholder="Insira uma nova categoria" >
+
+                    <td class="tblColunas registros"><?= $item['graos'] ?></td>
+                    <td class="tblColunas registros"><?= $item['kit'] ?></td>
+                    <td class="tblColunas registros"> 
+
+                    <a onClick="return confirm('Tem certeza que deseja excluir?');"  href="router.php?component=categorias&action=deletar&id=<?= $item['id'] ?>">
+                            <img src="../img/excluir.png" alt="Excluir" title="Excluir" class="excluir">
+                        </a>
+
+                      <img src="../img/editar-texto.png" alt="Editar" title="Editar" class="editar">
+                     
+  
+                    </td>
+
+
+
+            </tr>
+
+
+          <?php  
+            }
+          }
+          
+          ?>  
     
+      
    </main>
 
    <footer>
