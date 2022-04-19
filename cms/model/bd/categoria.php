@@ -10,7 +10,7 @@ function insertCategoria($dadosCategoria){
     $conexao = conexaoMySql();
 
     //monta o script
-    $sql = "insert into tblcategorias2
+    $sql = "insert into tblcategorias6
                 (graos,
                  moidos)
             values
@@ -42,7 +42,7 @@ function deleteCategoria($idcategoria){
     $conexao = conexaoMySql();
 
     //script para deletar um registro
-    $sql = 'delete from tblcategorias2 where idcategorias = ' . $id; 
+    $sql = 'delete from tblcategorias6 where idcategorias = ' . $id; 
 
      // Valida se o script está correto, sem erro de sitaxe e o executa
      if (mysqli_query($conexao, $sql)) {
@@ -70,7 +70,7 @@ function selectAllCategorias()
     $conexao = conexaoMySql();
 
     //script para listar
-    $sql = 'select * from tblcategorias2 order by idcategorias desc';
+    $sql = 'select * from tblcategorias6 order by idcategorias desc';
  
 
     $result = mysqli_query($conexao, $sql);
@@ -88,7 +88,7 @@ function selectAllCategorias()
         }
 
         fecharConexaoMySql($conexao);
-
+    
         return $arrayDados;
     }
 

@@ -118,20 +118,38 @@
         
  
       </table>
+
+  <div class="cadastroInformacoes">
+      <form action="router.php?component=categorias&action=inserir" name="frmCadastro" method="post">
      
       <div id="consultaCategoria"> 
         <table id="tblCategoria">
           <tr>
             <td id="tblTitulo" colspan="6">
-              <h1>Categorias</h1>
+              <h1>Consulta de categorias</h1>
 
             </td>
           </tr>
-
-        
-  
       </div>
 
+      <div class="campos">
+      
+        <h1>Cadastro de categorias</h1>
+        <label> Cadastro: </label>
+     
+
+      <div class="cadastroCategorias">
+           <input type="text" name="txtCadastro" value="">
+     </div>
+  </div>
+
+     <div class="enviar">
+          <input type="submit" name ="btnEnviar" value="Enviar" action="router.php?component=categorias&action=inserir"> 
+    </div>
+
+    </form>
+
+    </div>
       <?php 
       
             require_once('controller/controllerCategoria.php');
@@ -141,9 +159,12 @@
             if($listCategoria) {  
 
             foreach($listCategoria as $item){
+
+
                 ?>
-            <tr id="tblCategorias2">
-            <input type="field" placeholder="Insira uma nova categoria" >
+            <tr id="tblCategorias6">
+             
+             
 
                     <td class="tblColunas registros"><?= $item['graos'] ?></td>
                     <td class="tblColunas registros"><?= $item['kit'] ?></td>
@@ -151,15 +172,13 @@
 
                     <a onClick="return confirm('Tem certeza que deseja excluir?');"  href="router.php?component=categorias&action=deletar&id=<?= $item['id'] ?>">
                             <img src="../img/excluir.png" alt="Excluir" title="Excluir" class="excluir">
-                        </a>
+                    </a>
 
+                    
                       <img src="../img/editar-texto.png" alt="Editar" title="Editar" class="editar">
                      
   
                     </td>
-
-
-
             </tr>
 
 

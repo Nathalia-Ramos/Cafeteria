@@ -21,7 +21,6 @@ function inserirCategoria($dadosCategoria){
         else
             return array ('idErro' => 1, 
                               'message' => 'Não foi possível inserir os dados no banco de dados');
-
         
         }else 
             return array(
@@ -74,6 +73,9 @@ function listarCategoria(){
 
 }
 
+function buscarCategoria($id){
+    
+}
 
 
 ?>
