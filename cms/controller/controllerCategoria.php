@@ -1,5 +1,6 @@
 <?php
 
+
 function inserirCategoria($dadosCategoria){
     
     //validação para ver se o objeto está vazio 
@@ -9,8 +10,10 @@ function inserirCategoria($dadosCategoria){
             if(!empty($dadosCategoria['txtCategoria'])) {
                
                 $arrayDados = array (
-                "categoria" => $dadosCategorias['txtCategoria']
+                "txtCategoria" => $dadosCategoria['txtCategoria']
+            
                 );
+               
 
         //import do arquivo para manipular o BD
         require_once ('model/bd/categoria.php');
@@ -44,7 +47,7 @@ function excluirCategoria(){
         require_once('model/bd/contato.php');
 
         // Chama a função da model e valida se o retorno foi verdadeiro ou falso
-        if (deleteContato($id))
+        if (deleteCategoria($id))
             return true;
         else
             return array(
@@ -74,6 +77,25 @@ function listarCategoria(){
 }
 
 function buscarCategoria($id){
+    
+    if($id  =! 0 && !empty($id) && is_numeric($id)){
+        
+        require_once ('cms/model/bd/categoria.php');
+
+        $dados = selectByIdCategoria($id);
+
+         //Valida se existem dados para serem desenvolvidos
+         if (!empty($dados)) {
+            return $dados;
+        } else {
+            return false;
+        }
+    } else
+        return array(
+            'idErro' => 4,
+            'message' => 'Não é possível buscar um registro sem informar um Id válido'
+        );
+
     
 }
 

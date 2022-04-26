@@ -9,10 +9,10 @@ function insertCategoria($dadosCategoria){
 
     $conexao = conexaoMySql();
 
-    //monta o script
-    $sql = "insert into tblcategorias6
+    //monta o script do BD      
+    $sql = "insert into tblcategorias2
                 (graos,
-                 moidos)
+                 kit)
             values
            ('" . $dadosCategoria['graos'] . "',
             '" . $dadosCategoria['kit'] . "');";
@@ -25,24 +25,21 @@ function insertCategoria($dadosCategoria){
         $statusResposta = true;
   
     }else 
-
-
         fecharConexaoMysql ($conexao);
         
         return $statusResposta;
     
     
     
-    
                 
 }
 
-function deleteCategoria($idcategoria){
+function deleteCategoria($id){
 
     $conexao = conexaoMySql();
 
     //script para deletar um registro
-    $sql = 'delete from tblcategorias6 where idcategorias = ' . $id; 
+    $sql = 'delete from tblcategorias2 where idcategoria = ' . $id; 
 
      // Valida se o script está correto, sem erro de sitaxe e o executa
      if (mysqli_query($conexao, $sql)) {
@@ -58,7 +55,9 @@ function deleteCategoria($idcategoria){
 
 }
 
-
+function selectByIdCategoria($id){
+    
+}
 
 
 
@@ -70,7 +69,7 @@ function selectAllCategorias()
     $conexao = conexaoMySql();
 
     //script para listar
-    $sql = 'select * from tblcategorias6 order by idcategorias desc';
+    $sql = 'select * from tblcategorias2 order by idcategoria desc';
  
 
     $result = mysqli_query($conexao, $sql);
@@ -92,6 +91,19 @@ function selectAllCategorias()
         return $arrayDados;
     }
 
+}
+
+
+function updateCategoria(){
+
+    require_once('conexaoMySql');
+    $conexao = conexaoMysql();
+
+    $sql = "update tblcategorias2 set 
+    graos  =    '" . $dadosCategoria['celular'] . "',
+    kit    =    '" . $dadosCategoria['email'] . "'
+    
+    where idcontato = "  . $dadosCategoria['id']; 
 }
 
 ?>

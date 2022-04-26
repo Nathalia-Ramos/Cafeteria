@@ -120,6 +120,7 @@
       </table>
 
   <div class="cadastroInformacoes">
+
       <form action="router.php?component=categorias&action=inserir" name="frmCadastro" method="post">
      
       <div id="consultaCategoria"> 
@@ -139,7 +140,7 @@
      
 
       <div class="cadastroCategorias">
-           <input type="text" name="txtCadastro" value="">
+           <input type="text" name="txtCategoria" value="">
      </div>
   </div>
 
@@ -151,7 +152,7 @@
 
     </div>
       <?php 
-      
+
             require_once('controller/controllerCategoria.php');
 
             $listCategoria = listarCategoria();
@@ -162,7 +163,7 @@
 
 
                 ?>
-            <tr id="tblCategorias6">
+            <tr id="tblCategorias2">
              
              
 
