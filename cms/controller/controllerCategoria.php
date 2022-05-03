@@ -80,7 +80,7 @@ function buscarCategoria($id){
     
     if($id  =! 0 && !empty($id) && is_numeric($id)){
         
-        require_once ('cms/model/bd/categoria.php');
+        require_once ('model/bd/categoria.php');
 
         $dados = selectByIdCategoria($id);
 
@@ -100,4 +100,34 @@ function buscarCategoria($id){
 }
 
 
+function atualizarCategoria($dadosCategoria, $id){
+
+    //valida para ver se o campo está vazio
+    if(!empty($dadosCategoria)){
+         
+            //validacao para ver se a caixa está vazia
+        if(!empty($dadosCategoria['txtCategoria'])) {
+               
+           $arrayDados = array (
+             "txtCategoria" => $dadosCategoria['txtCategoria']
+            
+             );
+               
+              //Validação para garantir que o id seja válido
+            if(!empty($id) && $id != 0 && is_numeric($id)){
+
+                $arrayDados = array (
+                    "$id" => $id,
+                    "graos" => $dadosCategoria['graos'],
+                    "kit"   => $dadosCategoria ['kit']
+                );
+
+                require_once ('modelo/bd/categoria.php');
+
+
+            }
+        }
+    }
+
+}
 ?>

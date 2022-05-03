@@ -1,3 +1,31 @@
+
+<?php 
+
+  $form = (string) "router.php?component=categorias&action=inserir";
+
+   //valida se a utilização de variavel de sessao está ativa no servidor
+
+   if(session_status()){
+
+    if(!empty($_SESSION['dadosCategoria'])){
+
+      $idCategoria   =  $_SESSION['dadosCategoria']['idCategoria'];
+      $cadastro      = $_SESSION['dadosCategoria']['cadastro'];
+
+
+         // Mudamos a ação do form para editar o registro no click do botão salvar
+         $form = "router.php?component=categorias&action=editar&idCategoria=".$idCategoria;
+
+         unset($_SESSION['$dadosCategoria']);
+    }
+
+
+   }
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,16 +164,18 @@
       <div class="campos">
       
         <h1>Cadastro de categorias</h1>
-        <label> Cadastro: </label>
+        <label> Cadastro </label>
      
 
       <div class="cadastroCategorias">
-           <input type="text" name="txtCategoria" value="">
+           <input type="text" name="txtCategoria" value="<?= isset($cadastro)?$cadastro:null?>">
      </div>
   </div>
 
      <div class="enviar">
-          <input type="submit" name ="btnEnviar" value="Enviar" action="router.php?component=categorias&action=inserir"> 
+       <div class="eviar">
+          <input type="submit" name ="btnEnviar" value="Enviar"> 
+       </div>
     </div>
 
     </form>
@@ -163,23 +193,26 @@
 
 
                 ?>
-            <tr id="tblCategorias2">
-             
-             
+            <tr id="tblcategorias2">
+          
 
                     <td class="tblColunas registros"><?= $item['graos'] ?></td>
                     <td class="tblColunas registros"><?= $item['kit'] ?></td>
                     <td class="tblColunas registros"> 
 
-                    <a onClick="return confirm('Tem certeza que deseja excluir?');"  href="router.php?component=categorias&action=deletar&id=<?= $item['id'] ?>">
-                            <img src="../img/excluir.png" alt="Excluir" title="Excluir" class="excluir">
-                    </a>
-
-                    
-                      <img src="../img/editar-texto.png" alt="Editar" title="Editar" class="editar">
-                     
-  
+                    <td class= "tblColunas registros"> 
+                      <a onClick="return confirm('Tem certeza que deseja excluir?');"  href="router.php?component=categorias&action=deletar&idCategoria=<?= $item['idCategoria'] ?>">
+                         <img src="../img/excluir.png" alt="Excluir" title="Excluir" class="excluir">
+                      </a>
+                  </td>
+                  
+                    <td> 
+                      <a href="router.php?component=categorias&action=buscar&idCategoria=<?=$item['idCategoria']?>">
+                         <img src="../img/editar-texto.png" alt="Editar" title="Editar" class="editar">
+                      </a>
                     </td>
+  
+                    
             </tr>
 
 

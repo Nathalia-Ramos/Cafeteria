@@ -6,12 +6,14 @@ $component = (string) null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    $component = strtoupper($_GET['component']);
+    $action = strtoupper($_GET['action']);
+
     switch ($component){
         
          case 'CATEGORIAS';
- 
 
-  require_once('cms/controller/controllerCategoria.php');
+  require_once('controller/controllerCategoria.php');
   
 
 if ($action == 'INSERIR')
@@ -21,10 +23,7 @@ if ($action == 'INSERIR')
         }
 
 
-  
-    
     $resposta = inserirCategoria($_POST);
-
 
      //valida o tipo de dado que a controller retorna
      if (is_bool($resposta)) //se for booleano
@@ -42,10 +41,49 @@ if ($action == 'INSERIR')
                  window.history.back(); 
              </script>");
 
-        }  
-     }
+        }elseif ($action == 'BUSCAR'){
+            //recebe o id do registro que deve ser editado,
+            //e foi enviado pela url no link da imagem do editar que foi acionado na index
+            $idCategoria = $_GET['idCategoria'];
 
-   
+            //chama a função 
+            $dados = buscarCategoria($idCategoria);
+
+            //ativa a utilização da variavel da sessao no servidor
+            session_start();
+
+            $_SESSION['dadoscategoria'] = $dados;
+
+            require_once ('cms.php');
+
+        }elseif ($action == 'EDITAR'){
+        $idCategoria = $_GET['idCategoria'];
+    
+        //recebe o id que foi encaminhado na action do form pela URL 
+        $idCategoria = $_GET['idCategoria'];
+
+        //chama a função para editar 
+        $resposta = atualizarCategoria($_POST, $idCategoria);
+
+        //valida o tipo de dado que a controller retora
+
+        if(is_bool($resposta)){
+
+            //verifica se o retorno foi verdadeiro
+            if ($resposta)
+            echo ("<script> 
+                    alert('Registro editadocom sucesso!');
+                    window.location.href = 'cms.php'; 
+                </script>"); // essa funcao retorna a página inicial apos a execucao
+            }elseif (is_array($resposta))
+
+            echo ("<script> 
+                    alert('" . $resposta['message'] . "');
+                    window.history.back(); 
+                </script>");
+      }
+            break;
+    }
 }
 
 ?>

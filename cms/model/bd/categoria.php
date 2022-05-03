@@ -55,8 +55,25 @@ function deleteCategoria($id){
 
 }
 
-function selectByIdCategoria($id){
-    
+function selectByIdCategoria($idCategoria){
+    $conexao = conexaoMysql();
+
+    $sql = "select * from tblcategorias2 where idcategoria=".$idCategoria;
+
+    $result = mysqli_query($conexao, $sql);
+
+    if($result){
+        if($rsDados = mysqli_fetch_assoc($result)){
+
+            $arrayDados = array(
+                "graos" => $rsDados['graos'],
+                "kit"   => $rsDados['kit']
+            );
+        }
+    }
+    fecharConexaoMySql($conexao);
+
+    return $arrayDados;
 }
 
 
@@ -94,16 +111,32 @@ function selectAllCategorias()
 }
 
 
-function updateCategoria(){
+function updateCategoria($dadosCategoria){
 
     require_once('conexaoMySql');
     $conexao = conexaoMysql();
 
     $sql = "update tblcategorias2 set 
-    graos  =    '" . $dadosCategoria['celular'] . "',
-    kit    =    '" . $dadosCategoria['email'] . "'
+                graos  =    '" . $dadosCategoria['graos'] . "',
+                kit    =    '" . $dadosCategoria['kit'] . "'
     
-    where idcontato = "  . $dadosCategoria['id']; 
+            where idcategoria = ". $dadosCategoria['idCategoria'];
+
+     //executa o script no BD
+    //validacao para verificar se o script sql esta correto
+    if (mysqli_query($conexao, $sql)) {
+
+        if (mysqli_affected_rows($conexao))
+
+            $statusReposta = true;  // Podemos definir a variável criando em qualquer lugar
+
+    } else
+
+        // Solicita o fechamento da conexão
+        fecharConexaoMySql($conexao);
+
+    return $statusReposta;
+
 }
 
 ?>
