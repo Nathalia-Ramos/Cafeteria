@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'POST'
   require_once('controller/controllerCategoria.php');
   
 
-if ($action == 'INSERIR')
-{
+    if ($action == 'INSERIR')
+    {
         if(isset($_POST) && !empty($_POST)){
 
         }
@@ -44,10 +44,10 @@ if ($action == 'INSERIR')
         }elseif ($action == 'BUSCAR'){
             //recebe o id do registro que deve ser editado,
             //e foi enviado pela url no link da imagem do editar que foi acionado na index
-            $idCategoria = $_GET['idCategoria'];
+            $idcategoria = $_GET['id'];
 
             //chama a função 
-            $dados = buscarCategoria($idCategoria);
+            $dados = buscarCategoria($idcategoria);
 
             //ativa a utilização da variavel da sessao no servidor
             session_start();
@@ -57,13 +57,11 @@ if ($action == 'INSERIR')
             require_once ('cms.php');
 
         }elseif ($action == 'EDITAR'){
-        $idCategoria = $_GET['idCategoria'];
-    
-        //recebe o id que foi encaminhado na action do form pela URL 
-        $idCategoria = $_GET['idCategoria'];
+
+        $idcategoria = $_GET['id'];
 
         //chama a função para editar 
-        $resposta = atualizarCategoria($_POST, $idCategoria);
+        $resposta = atualizarCategoria($_POST, $idcategoria);
 
         //valida o tipo de dado que a controller retora
 
@@ -72,7 +70,7 @@ if ($action == 'INSERIR')
             //verifica se o retorno foi verdadeiro
             if ($resposta)
             echo ("<script> 
-                    alert('Registro editadocom sucesso!');
+                    alert('Registro editado com sucesso!');
                     window.location.href = 'cms.php'; 
                 </script>"); // essa funcao retorna a página inicial apos a execucao
             }elseif (is_array($resposta))

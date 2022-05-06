@@ -6,7 +6,7 @@
  $statusReposta = (bool) false;
 
 function insertCategoria($dadosCategoria){
-
+    
     $conexao = conexaoMySql();
 
     //monta o script do BD      
@@ -28,10 +28,7 @@ function insertCategoria($dadosCategoria){
         fecharConexaoMysql ($conexao);
         
         return $statusResposta;
-    
-    
-    
-                
+     
 }
 
 function deleteCategoria($id){
@@ -55,10 +52,11 @@ function deleteCategoria($id){
 
 }
 
-function selectByIdCategoria($idCategoria){
+function selectByIdCategoria($id){
+
     $conexao = conexaoMysql();
 
-    $sql = "select * from tblcategorias2 where idcategoria=".$idCategoria;
+    $sql = "select * from tblcategorias2 where idcategoria=".$id;
 
     $result = mysqli_query($conexao, $sql);
 
@@ -66,6 +64,7 @@ function selectByIdCategoria($idCategoria){
         if($rsDados = mysqli_fetch_assoc($result)){
 
             $arrayDados = array(
+                "id"   => $rsDados['idcategoria'],
                 "graos" => $rsDados['graos'],
                 "kit"   => $rsDados['kit']
             );
@@ -113,14 +112,14 @@ function selectAllCategorias()
 
 function updateCategoria($dadosCategoria){
 
-    require_once('conexaoMySql');
+    
     $conexao = conexaoMysql();
 
     $sql = "update tblcategorias2 set 
-                graos  =    '" . $dadosCategoria['graos'] . "',
-                kit    =    '" . $dadosCategoria['kit'] . "'
+                graos  =  '" . $dadosCategoria['graos'] . "',
+                kit    =  '" . $dadosCategoria['kit'] . "'
     
-            where idcategoria = ". $dadosCategoria['idCategoria'];
+            where idcategoria = ". $dadosCategoria['id'];
 
      //executa o script no BD
     //validacao para verificar se o script sql esta correto

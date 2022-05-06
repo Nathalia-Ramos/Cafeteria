@@ -1,27 +1,30 @@
 
 <?php 
 
+  require_once('./model/bd/categoria.php');
+
   $form = (string) "router.php?component=categorias&action=inserir";
 
    //valida se a utilização de variavel de sessao está ativa no servidor
 
-   if(session_status()){
+   if(session_status())
+   {
 
     if(!empty($_SESSION['dadosCategoria'])){
+      $id   =  $_SESSION['dadosCategoria']['id'];
+      $graos = $_SESSION['dadosCategoria']['graos'];
+      $kit = $_SESSION['dadosCategoria']['kit'];
 
-      $idCategoria   =  $_SESSION['dadosCategoria']['idCategoria'];
-      $cadastro      = $_SESSION['dadosCategoria']['cadastro'];
 
 
          // Mudamos a ação do form para editar o registro no click do botão salvar
-         $form = "router.php?component=categorias&action=editar&idCategoria=".$idCategoria;
+         $form = "router.php?component=categorias&action=editar&id=".$id;
 
          unset($_SESSION['$dadosCategoria']);
     }
 
 
    }
-
 
 ?>
 
@@ -107,12 +110,6 @@
   
       </div>
 
-     
-    
-
-
-
-  
   <?php 
 
         require_once('controller/controllerContatos.php');
@@ -121,16 +118,18 @@
 
         //estrutura de repetição para retornar os dados do array e printar na tela
         foreach($listContato as $item){
+         
             ?>
          <tr id="tblLinhas">
                     <td class="tblColunas registros"><?= $item['nome'] ?></td>
                     <td class="tblColunas registros"><?= $item['email'] ?></td>
-                    <td class="tblColunas registros"><?= $item['mensagem'] ?></td>
+                    <td class="tblColunas registros"><?= $item['mensagem']?></td>
 
                     <td class="tblColunas registros">
                         
                        
-                        <a onClick="return confirm('Tem certeza que deseja excluir?');" href="router.php?component=categorias&action=deletar&id=<?= $item['id'] ?>">
+                        <a onClick="return confirm('Tem certeza que deseja excluir?');" href="router.php?component=categorias&action=deletar&id=<?= $item['id'] ?>" >
+                        
                             <img src="../img/excluir.png" alt="Excluir" title="Excluir" class="excluir">
                         </a>
                     </td>
@@ -149,12 +148,13 @@
 
   <div class="cadastroInformacoes">
 
+ 
       <form action="router.php?component=categorias&action=inserir" name="frmCadastro" method="post">
      
       <div id="consultaCategoria"> 
         <table id="tblCategoria">
           <tr>
-            <td id="tblTitulo" colspan="6">
+            <td id="tblTitulo" colspan="10">
               <h1>Consulta de categorias</h1>
 
             </td>
@@ -178,50 +178,44 @@
        </div>
     </div>
 
-    </form>
-
-    </div>
+    
       <?php 
 
             require_once('controller/controllerCategoria.php');
 
+            
             $listCategoria = listarCategoria();
-
-            if($listCategoria) {  
-
+        
+          
             foreach($listCategoria as $item){
-
-
+              
                 ?>
             <tr id="tblcategorias2">
-          
-
+              
                     <td class="tblColunas registros"><?= $item['graos'] ?></td>
                     <td class="tblColunas registros"><?= $item['kit'] ?></td>
                     <td class="tblColunas registros"> 
 
                     <td class= "tblColunas registros"> 
-                      <a onClick="return confirm('Tem certeza que deseja excluir?');"  href="router.php?component=categorias&action=deletar&idCategoria=<?= $item['idCategoria'] ?>">
+                      <a onClick="return confirm('Tem certeza que deseja excluir?');"  href="router.php?component=categorias&action=deletar&id=<?=$item['id'] ?>">
                          <img src="../img/excluir.png" alt="Excluir" title="Excluir" class="excluir">
                       </a>
                   </td>
                   
                     <td> 
-                      <a href="router.php?component=categorias&action=buscar&idCategoria=<?=$item['idCategoria']?>">
+                      <a href="router.php?component=categorias&action=buscar&id=<?=$item['id']?>">
                          <img src="../img/editar-texto.png" alt="Editar" title="Editar" class="editar">
                       </a>
-                    </td>
-  
-                    
+                    </td>             
             </tr>
 
-
           <?php  
-            }
-          }
-          
+            }    
           ?>  
     
+    </form>
+
+    </div>
       
    </main>
 

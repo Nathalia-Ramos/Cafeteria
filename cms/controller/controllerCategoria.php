@@ -10,11 +10,12 @@ function inserirCategoria($dadosCategoria){
             if(!empty($dadosCategoria['txtCategoria'])) {
                
                 $arrayDados = array (
-                "txtCategoria" => $dadosCategoria['txtCategoria']
-            
-                );
+                "graos" => $dadosCategoria['txtCategoria'],
+                "kit" => $dadosCategoria['txtCategoria']
                
-
+                );
+         
+         
         //import do arquivo para manipular o BD
         require_once ('model/bd/categoria.php');
 
@@ -66,12 +67,12 @@ function listarCategoria(){
     require_once('model/bd/categoria.php');
 
     $dados = selectAllCategorias();
-
+    
+    
     if (!empty($dados))
          return $dados;
     else
         return false;
-
 
 
 }
@@ -83,6 +84,9 @@ function buscarCategoria($id){
         require_once ('model/bd/categoria.php');
 
         $dados = selectByIdCategoria($id);
+
+        
+       
 
          //Valida se existem dados para serem desenvolvidos
          if (!empty($dados)) {
@@ -102,31 +106,48 @@ function buscarCategoria($id){
 
 function atualizarCategoria($dadosCategoria, $id){
 
+    $_SESSION['dadosCategoria'] = $id;
+
     //valida para ver se o campo está vazio
     if(!empty($dadosCategoria)){
          
             //validacao para ver se a caixa está vazia
         if(!empty($dadosCategoria['txtCategoria'])) {
                
-           $arrayDados = array (
-             "txtCategoria" => $dadosCategoria['txtCategoria']
-            
+           $arrayDados = array(
+              "id"   => $id,
+             "graos" => $dadosCategoria['txtCategoria'],
+             "kit"  => $dadosCategoria ['txtCategoria']
+         
              );
                
               //Validação para garantir que o id seja válido
             if(!empty($id) && $id != 0 && is_numeric($id)){
 
                 $arrayDados = array (
-                    "$id" => $id,
+                    "id" => $id,
                     "graos" => $dadosCategoria['graos'],
                     "kit"   => $dadosCategoria ['kit']
                 );
 
                 require_once ('modelo/bd/categoria.php');
 
+                if(updateCategoria($arrayDados))
+                      return true;         
+                else
+                      return array('idErro' => 1, 
+                                    'message' => 'Não foi possível atualizar os dados no banco de dados');
 
-            }
-        }
+                }else {
+                       return array(
+                          'idErro' => 4,
+                          'message' => 'Não é possível atualizar um registro sem informar um Id válido');
+                    }
+                }else
+                        return array(
+                            'idErro' => 2,
+                            'message' => 'Existem campos obrigatórios que não foram preenchidos'
+                            );
     }
 
 }
