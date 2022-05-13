@@ -65,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'POST'
 
         //valida o tipo de dado que a controller retora
 
-        if(is_bool($resposta)){
+        if(is_bool($resposta))
+        {
 
             //verifica se o retorno foi verdadeiro
             if ($resposta)

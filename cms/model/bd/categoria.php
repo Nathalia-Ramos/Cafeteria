@@ -36,7 +36,7 @@ function deleteCategoria($id){
     $conexao = conexaoMySql();
 
     //script para deletar um registro
-    $sql = 'delete from tblcategorias2 where idcategoria = ' . $id; 
+    $sql = 'delete from tblcategorias2 where idcategoria = '. $id; 
 
      // Valida se o script está correto, sem erro de sitaxe e o executa
      if (mysqli_query($conexao, $sql)) {
@@ -64,7 +64,7 @@ function selectByIdCategoria($id){
         if($rsDados = mysqli_fetch_assoc($result)){
 
             $arrayDados = array(
-                "id"   => $rsDados['idcategoria'],
+                "idcategoria"   => $rsDados['idcategoria'],
                 "graos" => $rsDados['graos'],
                 "kit"   => $rsDados['kit']
             );
@@ -117,7 +117,7 @@ function updateCategoria($dadosCategoria){
 
     $sql = "update tblcategorias2 set 
                 graos  =  '" . $dadosCategoria['graos'] . "',
-                kit    =  '" . $dadosCategoria['kit'] . "'
+                kit    =  '" . $dadosCategoria['kit'] . "',
     
             where idcategoria = ". $dadosCategoria['id'];
 

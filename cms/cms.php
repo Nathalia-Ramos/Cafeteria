@@ -180,7 +180,6 @@
 
     
       <?php 
-
             require_once('controller/controllerCategoria.php');
 
             

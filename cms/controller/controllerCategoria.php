@@ -85,9 +85,7 @@ function buscarCategoria($id){
 
         $dados = selectByIdCategoria($id);
 
-        
        
-
          //Valida se existem dados para serem desenvolvidos
          if (!empty($dados)) {
             return $dados;
@@ -106,7 +104,7 @@ function buscarCategoria($id){
 
 function atualizarCategoria($dadosCategoria, $id){
 
-    $_SESSION['dadosCategoria'] = $id;
+    $_SESSION['dadosCategoria'] = $dadosCategoria;
 
     //valida para ver se o campo está vazio
     if(!empty($dadosCategoria)){
